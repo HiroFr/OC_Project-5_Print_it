@@ -53,9 +53,6 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-body {
-
-}
 section {
 	margin-block: 6em;
 }
@@ -131,6 +128,9 @@ header {
 }
 #banner .arrow_right {
 	right: 10px;
+}
+#banner .cursorPointer {
+	cursor: pointer;
 }
 /* Gestion des points du carrousel */
 .dots {
