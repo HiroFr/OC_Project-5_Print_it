@@ -25,15 +25,22 @@ var arrowRight = document.querySelector(".arrow_right");
 var nbrSlides = slides.length;
 console.log(nbrSlides);
 
-var divDots = document.querySelector("#banner > div");
-
 /* ---- */
 /* Pour ajouter le nbr de dot en fonction de la taille du tableau */
+function updateBulletPoints(currentIndex) {
+	var divDots = document.querySelector("#banner > div");
+	divDots.innerHTML = "";
 
-for (var i = 0; i < nbrSlides; i++) {
-	var dot = document.createElement("span");
-	dot.classList.add("dot");
-	divDots.appendChild(dot);
+	for (var i = 0; i < nbrSlides; i++) {
+		var dot = document.createElement("span");
+		dot.classList.add("dot");
+
+		if (i === currentIndex) {
+			dot.classList.add("dot_selected"); // Ajouter la classe dot_selected
+		}
+
+		divDots.appendChild(dot);
+	}
 }
 
 /* ---- */
@@ -53,7 +60,11 @@ arrowLeft.addEventListener("click", function () {
 	console.log("Je clique sur la flèche de gauche !")
 
 	currentSlideIndex--;
+	if (currentSlideIndex < 0) {
+		currentSlideIndex = slides.length - 1;
+	}
 	updateCarousel();
+	updateBulletPoints(currentSlideIndex);
 
 });
 
@@ -64,8 +75,13 @@ arrowRight.addEventListener("click", function () {
 	console.log("Je clique sur la flèche de droite !")
 
 	currentSlideIndex++;
-    updateCarousel();
+	if (currentSlideIndex >= slides.length) {
+		currentSlideIndex = 0;
+	}
+  updateCarousel();
+	updateBulletPoints(currentSlideIndex);
 });
 
 // Mettre à jour le contenu initial du carrousel
 updateCarousel();
+updateBulletPoints(currentSlideIndex);
